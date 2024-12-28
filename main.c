@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 15:12:10 by authomas          #+#    #+#             */
-/*   Updated: 2024/12/28 15:53:53 by authomas         ###   ########lyon.fr   */
+/*   Created: 2024/12/28 14:55:56 by authomas          #+#    #+#             */
+/*   Updated: 2024/12/28 14:59:30 by authomas         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+int	main(void)
 {
-	char	*str;
-
-	str = (char *)s;
-	while (*str)
-	{
-		if (*str == ((char)c))
-			return (str);
-		str++;
-	}
-	if ((char)c == '\0')
-		return (str);
-	return (NULL);
+	get_next_line(1);
+	return (0);
 }
+
