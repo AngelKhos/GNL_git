@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:12:18 by authomas          #+#    #+#             */
-/*   Updated: 2025/01/02 20:12:05 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/01/03 02:58:40 by authomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,16 @@
 # endif
 
 # include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s);
+int		ft_searchline(char *s);
+char	*ft_strdup(char *s);
 char	*ft_join(char *s1, char *s2);
+char	*free_nl(char *line, int i);
+void	newline(char *line, char *buff);
+void	ft_bzero(char *s);
+size_t	ft_strlen(char *s);
 
 #endif

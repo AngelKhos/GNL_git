@@ -6,13 +6,13 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:12:10 by authomas          #+#    #+#             */
-/*   Updated: 2025/01/02 19:59:43 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/01/03 03:20:03 by authomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
 	size_t	i;
 
@@ -22,23 +22,23 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+int	ft_searchline(char *s)
 {
-	char	*str;
+	int	i;
 
-	str = (char *)s;
-	while (*str)
+	i = 0;
+	if (!s)
+		return (-1);
+	while (s[i])
 	{
-		if (*str == ((char)c))
-			return (str);
-		str++;
+		if (s[i] == '\n')
+			return (i);
+		i++;
 	}
-	if ((char)c == '\0')
-		return (str);
-	return (NULL);
+	return (-1);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(char *s)
 {
 	size_t	i;
 	char	*dest;
@@ -62,8 +62,8 @@ char	*ft_join(char *s1, char *s2)
 	size_t	i;
 	size_t	j;
 
-	if (!s1 || !s2)
-		return (NULL);
+	if (!s1)
+		return (ft_strdup(s2));
 	i = -1;
 	j = 0;
 	str = malloc(sizeof (char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
@@ -81,5 +81,18 @@ char	*ft_join(char *s1, char *s2)
 		j++;
 	}
 	str[j] = '\0';
+	free(s1);
 	return (str);
+}
+
+void	ft_bzero(char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		s[i] = '\0';
+		i++;
+	}
 }

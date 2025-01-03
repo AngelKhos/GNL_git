@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:12:14 by authomas          #+#    #+#             */
-/*   Updated: 2025/01/02 20:21:13 by authomas         ###   ########lyon.fr   */
+/*   Updated: 2025/01/03 03:16:53 by authomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,56 @@
 
 char	*get_next_line(int fd)
 {
-	char		temp_line[BUFFER_SIZE];
-	size_t		len;
 	char		*line;
-	static char	buff[BUFFER_SIZE] = "";
+	static char	buff[BUFFER_SIZE + 1];
+	int			len;
 
-	read(fd, temp_line, BUFFER_SIZE);
-	len = temp_line - ft_strchr(temp_line, '\n');
-	while (!ft_strchr(temp_line, '\n'))
+	line = NULL;
+	if (fd < 0 || fd > OPEN_MAX)
+		return (NULL);
+	if (buff[0])
 	{
-		
+		line = ft_strdup(buff);
+		ft_bzero(buff);
 	}
-	if (ft_strchr(temp_line, '\n'))
+	len = BUFFER_SIZE;
+	while (ft_searchline(line) == -1 && len == BUFFER_SIZE)
 	{
-		
+		len = read(fd, buff, BUFFER_SIZE);
+		if (len <= 0)
+			return (free_nl(line, len));
+		buff[len] = 0;
+		line = ft_join(line, buff);
+	}
+	if (ft_searchline(line) != -1)
+		newline(line, (char *)buff);
+	return (line);
+}
+
+void	newline(char *line, char *buff)
+{
+	char	*tmp;
+	size_t	i;
+
+	i = ft_searchline(line) + 1;
+	tmp = ft_strdup(&line[i]);
+	line[i] = 0;
+	i = 0;
+	while (tmp[i])
+	{
+		buff[i] = tmp[i];
+		i++;
+	}
+	buff[i] = 0;
+	free(tmp);
+}
+
+char	*free_nl(char *line, int i)
+{
+	if (i == -1)
+	{
+		free(line);
+		return (NULL);
 	}
 	return (line);
 }
