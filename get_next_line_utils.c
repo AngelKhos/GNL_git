@@ -6,7 +6,7 @@
 /*   By: authomas <authomas@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:12:10 by authomas          #+#    #+#             */
-/*   Updated: 2025/01/03 03:20:03 by authomas         ###   ########.fr       */
+/*   Updated: 2025/01/03 17:42:22 by authomas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	ft_bzero(char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (i < BUFFER_SIZE)
 	{
 		s[i] = '\0';
 		i++;
